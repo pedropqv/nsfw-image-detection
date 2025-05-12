@@ -49,7 +49,7 @@ from PIL import Image
 import torch
 
 # Load model and processor
-model_name = "strangerguardhf/nsfw_image_detector"  # Replace with your model path if needed
+model_name = "strangerguardhf/nsfw_image_detection"  # Replace with your model path if needed
 model = SiglipForImageClassification.from_pretrained(model_name)
 processor = AutoImageProcessor.from_pretrained(model_name)
 
