@@ -1,0 +1,9 @@
+
+# ID to Label mapping
+id2label = {
+    "0": "Anime Picture",
+    "1": "Hentai",
+    "2": "Normal",
+    "3": "Pornography",
+    "4": "Enticing or Sensual"
+}
