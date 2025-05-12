@@ -35,7 +35,7 @@ Enticing or Sensual     0.9132    0.9429    0.9278      5600
 ## **Install Dependencies**
 
 ```bash
-!pip install transformers torch pillow gradio
+!pip install transformers torch pillow gradio hf_xet
 ```
 
 ---
